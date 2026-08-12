@@ -66,39 +66,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    const navToggle = document.getElementById('navToggle');
-    const mainNav = document.getElementById('mainNav');
-    const mobileMenuBtn = document.querySelector('.mobile-bottom-nav .menu-toggle');
+    // --- Bottom-Sheet Mobile Menu Modal ---
+    const mobileMenuModal = document.getElementById('mobileMenuModal');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
 
-    if (mainNav) {
-        if (navToggle) {
-            navToggle.addEventListener('click', () => {
-                const isOpen = mainNav.classList.toggle('open');
-                navToggle.setAttribute('aria-expanded', String(isOpen));
-            });
-        }
-
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                mainNav.classList.toggle('show-menu');
-            });
-        }
-
-        mainNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('open');
-                mainNav.classList.remove('show-menu');
-                if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
-            });
+    if (mobileMenuModal && mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            mobileMenuModal.classList.toggle('active');
         });
+    }
 
-        mainNav.addEventListener('click', (e) => {
-            if (e.target === mainNav) {
-                mainNav.classList.remove('open');
-                mainNav.classList.remove('show-menu');
-                if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
-            }
+    if (mobileMenuModal && closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenuModal.classList.remove('active');
+        });
+    }
+
+    // Close menu when any grid link is clicked
+    if (mobileMenuModal) {
+        mobileMenuModal.querySelectorAll('.menu-grid a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuModal.classList.remove('active');
+            });
         });
     }
 
