@@ -1039,7 +1039,7 @@ section[id] {
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
     .wrap {
         padding: 0 16px;
     }
